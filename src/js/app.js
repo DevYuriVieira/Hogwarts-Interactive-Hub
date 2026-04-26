@@ -1,5 +1,4 @@
 
-
 const App = {
     currentPage: null,
     userHouse: localStorage.getItem('userHouse') || null,
@@ -11,12 +10,27 @@ const App = {
             document.body.className = 'theme-' + this.userHouse;
         }
         SoundEngine.init();
-        this.navigate('home', true);
+        
+        // Se não tiver casa ou se tiver o hash #sorting, abre no chapéu
+        const isSortingRoute = window.location.hash === '#sorting' || !this.userHouse;
+        
+        if (isSortingRoute) {
+            this.navigate('home', true);
+            this.startSorting(true);
+        } else {
+            this.navigate('home', true);
+        }
+
         this.startQuotesRotation();
         this.setupParticles();
         this.setupSpellInput();
         this.setupLazyAnimations();
-        window.addEventListener('scroll', () => {}, { passive: true });
+        
+        window.addEventListener('hashchange', () => {
+            if (window.location.hash === '#sorting') {
+                this.startSorting();
+            }
+        });
     },
 
     setupSpellInput() {
@@ -58,7 +72,6 @@ const App = {
             const target = document.getElementById('page-' + pageId);
             if (!target) return;
 
-
             switch(pageId) {
                 case 'home':       target.innerHTML = this.renderHome(); break;
                 case 'movies':     target.innerHTML = this.renderMovies(); break;
@@ -72,7 +85,6 @@ const App = {
             target.style.display = 'block';
             target.classList.add('active');
 
-
             if (['movies','books','games'].includes(pageId)) {
                 target.querySelectorAll('.accordion-container').forEach(c => this.setupAccordion(c));
             }
@@ -83,13 +95,20 @@ const App = {
         }, immediate ? 0 : 400);
     },
 
-
     renderHome() {
         const randomQuote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
         let houseHtml = '';
         
         if (this.userHouse) {
-            const details = HOUSE_DETAILS[this.userHouse.toLowerCase()];
+            const details = HOUSES_DATA[this.userHouse.toLowerCase()] || { name: this.userHouse, traits: '', color: '#fff' };
+            // Adicionando detalhes extras se não existirem no repositório básico
+            const houseDetails = {
+                gryffindor: { founder: 'Godric Gryffindor', animal: 'Leão', colors: 'Escarlate e Ouro', relic: 'Espada de Gryffindor', element: 'Fogo', ghost: 'Nick Quase Sem Cabeça', description: 'Onde habitam os de coração indômito. Sua ousadia, sangue-frio e nobreza destacam os estudantes da Grifinória dos demais.' },
+                slytherin:  { founder: 'Salazar Slytherin', animal: 'Serpente', colors: 'Verde e Prata', relic: 'Medalhão de Slytherin', element: 'Água', ghost: 'Barão Sangrento', description: 'Quem sabe a Sonserina será a sua casa. E ali fará seus verdadeiros amigos. Homens de astúcia que usam quaisquer meios para atingir os fins que antes colimaram.' },
+                ravenclaw:  { founder: 'Rowena Ravenclaw', animal: 'Águia', colors: 'Azul e Bronze', relic: 'Diadema de Ravenclaw', element: 'Ar', ghost: 'Dama Cinzenta', description: 'Ou será a velha e sábia Corvinal. A casa dos que tem a mente alerta. Onde os homens de grande espírito e saber sempre encontrarão companheiros seus iguais.' },
+                hufflepuff: { founder: 'Helga Hufflepuff', animal: 'Teixugo', colors: 'Amarelo e Preto', relic: 'Taça de Hufflepuff', element: 'Terra', ghost: 'Frei Gorducho', description: 'Quem sabe é na Lufa-Lufa que você vai morar. Onde seus moradores são justos e leais. Pacientes, verdadeiros, sem medo da dor.' }
+            }[this.userHouse.toLowerCase()];
+
             houseHtml = `
                 <div class="house-showcase active" style="margin: 100px auto; max-width: 1100px; text-align:center; animation: fadeInUp 1s ease-out;">
                     <div style="display:flex; justify-content:center; margin-bottom: 40px;">
@@ -100,13 +119,13 @@ const App = {
                     <h2 style="color:var(--neon-color); font-size:5.5rem; font-family:var(--font-heading); letter-spacing:10px; text-shadow: var(--neon-glow-strong); margin-bottom: 40px; text-transform: uppercase;">${this.userHouse.toUpperCase()}</h2>
                     <div class="magic-border-card" style="margin: 40px auto; max-width: 900px;">
                         <div class="magic-border-inner house-details-grid" style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 40px; text-align:left; padding: 60px; backdrop-filter: blur(20px);">
-                            <div style="grid-column: span 2; font-style:italic; font-size:1.4rem; color:var(--text-primary); border-bottom: 2px solid var(--neon-color); box-shadow: 0 4px 10px -5px var(--neon-color); padding-bottom:25px; margin-bottom:25px; line-height: 1.6; text-align:center;">"${details.description}"</div>
-                            <div style="font-size: 1.2rem;"><span style="color:var(--neon-color); font-weight:900; text-transform:uppercase; letter-spacing:2px; font-size:0.8rem; display:block; margin-bottom:5px;">Fundador</span> ${details.founder}</div>
-                            <div style="font-size: 1.2rem;"><span style="color:var(--neon-color); font-weight:900; text-transform:uppercase; letter-spacing:2px; font-size:0.8rem; display:block; margin-bottom:5px;">Mascote</span> ${details.animal}</div>
-                            <div style="font-size: 1.2rem;"><span style="color:var(--neon-color); font-weight:900; text-transform:uppercase; letter-spacing:2px; font-size:0.8rem; display:block; margin-bottom:5px;">Cores</span> ${details.colors}</div>
-                            <div style="font-size: 1.2rem;"><span style="color:var(--neon-color); font-weight:900; text-transform:uppercase; letter-spacing:2px; font-size:0.8rem; display:block; margin-bottom:5px;">Relíquia</span> ${details.relic}</div>
-                            <div style="font-size: 1.2rem;"><span style="color:var(--neon-color); font-weight:900; text-transform:uppercase; letter-spacing:2px; font-size:0.8rem; display:block; margin-bottom:5px;">Elemento</span> ${details.element}</div>
-                            <div style="font-size: 1.2rem;"><span style="color:var(--neon-color); font-weight:900; text-transform:uppercase; letter-spacing:2px; font-size:0.8rem; display:block; margin-bottom:5px;">Fantasma</span> ${details.ghost}</div>
+                            <div style="grid-column: span 2; font-style:italic; font-size:1.4rem; color:var(--text-primary); border-bottom: 2px solid var(--neon-color); box-shadow: 0 4px 10px -5px var(--neon-color); padding-bottom:25px; margin-bottom:25px; line-height: 1.6; text-align:center;">"${houseDetails.description}"</div>
+                            <div style="font-size: 1.2rem;"><span style="color:var(--neon-color); font-weight:900; text-transform:uppercase; letter-spacing:2px; font-size:0.8rem; display:block; margin-bottom:5px;">Fundador</span> ${houseDetails.founder}</div>
+                            <div style="font-size: 1.2rem;"><span style="color:var(--neon-color); font-weight:900; text-transform:uppercase; letter-spacing:2px; font-size:0.8rem; display:block; margin-bottom:5px;">Mascote</span> ${houseDetails.animal}</div>
+                            <div style="font-size: 1.2rem;"><span style="color:var(--neon-color); font-weight:900; text-transform:uppercase; letter-spacing:2px; font-size:0.8rem; display:block; margin-bottom:5px;">Cores</span> ${houseDetails.colors}</div>
+                            <div style="font-size: 1.2rem;"><span style="color:var(--neon-color); font-weight:900; text-transform:uppercase; letter-spacing:2px; font-size:0.8rem; display:block; margin-bottom:5px;">Relíquia</span> ${houseDetails.relic}</div>
+                            <div style="font-size: 1.2rem;"><span style="color:var(--neon-color); font-weight:900; text-transform:uppercase; letter-spacing:2px; font-size:0.8rem; display:block; margin-bottom:5px;">Elemento</span> ${houseDetails.element}</div>
+                            <div style="font-size: 1.2rem;"><span style="color:var(--neon-color); font-weight:900; text-transform:uppercase; letter-spacing:2px; font-size:0.8rem; display:block; margin-bottom:5px;">Fantasma</span> ${houseDetails.ghost}</div>
                         </div>
                     </div>
                 </div>
@@ -223,21 +242,6 @@ const App = {
                             <div><span class="countdown-num" id="cd-hours" style="font-family:'Cinzel'; font-size:4.5rem; font-weight:900; color:#000; line-height:1;">${String(hours).padStart(2,'0')}</span><div style="font-family:'Cinzel'; font-size:0.8rem; letter-spacing:4px; color:#000; margin-top:5px;">HORAS</div></div>
                             <div><span class="countdown-num" id="cd-minutes" style="font-family:'Cinzel'; font-size:4.5rem; font-weight:900; color:#000; line-height:1;">${String(minutes).padStart(2,'0')}</span><div style="font-family:'Cinzel'; font-size:0.8rem; letter-spacing:4px; color:#000; margin-top:5px;">MINUTOS</div></div>
                             <div><span class="countdown-num" id="cd-seconds" style="font-family:'Cinzel'; font-size:4.5rem; font-weight:900; color:#000; line-height:1;">${String(seconds).padStart(2,'0')}</span><div style="font-family:'Cinzel'; font-size:0.8rem; letter-spacing:4px; color:#000; margin-top:5px;">SEGUNDOS</div></div>
-                        </div>
-                    </div>
-
-                    <div class="prophet-columns" style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:0; margin-top:60px; border-top:3px solid #000; padding-top:30px;">
-                        <div style="padding:0 25px 0 0; border-right:1px solid #000;">
-                            <h4 style="font-family:'UnifrakturMaguntia'; font-size:1.8rem; color:#000; margin-bottom:15px;">A Produção</h4>
-                            <p style="font-size:0.95rem; text-align:justify; line-height:1.7; color:#000;">A Warner Bros. Television anunciou oficialmente a produção da série em parceria com a plataforma MAX. Com J.K. Rowling como produtora executiva, cada temporada adapta fielmente um dos sete volumes da saga — algo que os filmes nunca puderam fazer.</p>
-                        </div>
-                        <div style="padding:0 25px; border-right:1px solid #000;">
-                            <h4 style="font-family:'UnifrakturMaguntia'; font-size:1.8rem; color:#000; margin-bottom:15px;">O Elenco</h4>
-                            <p style="font-size:0.95rem; text-align:justify; line-height:1.7; color:#000;">As audições para os papéis principais ainda estão em andamento. A produtora confirmou que busca rostos novos para Harry, Hermione e Ron, repetindo a fórmula bem-sucedida dos filmes de 2001. Nomes serão divulgados em breve.</p>
-                        </div>
-                        <div style="padding:0 0 0 25px;">
-                            <h4 style="font-family:'UnifrakturMaguntia'; font-size:1.8rem; color:#000; margin-bottom:15px;">O Que Esperar</h4>
-                            <p style="font-size:0.95rem; text-align:justify; line-height:1.7; color:#000;">Fãs podem esperar cenas e personagens jamais adaptados para as telas: subtramas removidas, arcos de personagens secundários desenvolvidos e toda a riqueza que apenas o formato televisivo pode oferecer ao universo de Rowling.</p>
                         </div>
                     </div>
                 </div>
@@ -370,9 +374,6 @@ const App = {
 
         const modal = document.createElement('div');
         modal.className = 'char-modal-overlay';
-        modal.setAttribute('role', 'dialog');
-        modal.setAttribute('aria-modal', 'true');
-        modal.setAttribute('aria-label', 'Perfil de ' + c.name);
         modal.innerHTML = `
             <div class="char-modal-inner">
                 <button class="char-modal-close" onclick="App.closeCharModal()" aria-label="Fechar modal">✕</button>
@@ -397,16 +398,12 @@ const App = {
         modal.addEventListener('click', (e) => { if (e.target === modal) this.closeCharModal(); });
         document.body.appendChild(modal);
         requestAnimationFrame(() => modal.classList.add('active'));
-
-        this._charModalEsc = (e) => { if (e.key === 'Escape') this.closeCharModal(); };
-        document.addEventListener('keydown', this._charModalEsc);
     },
 
     closeCharModal() {
         SoundEngine.play('modal-close');
         const m = document.querySelector('.char-modal-overlay');
         if (m) { m.classList.remove('active'); setTimeout(() => m.remove(), 400); }
-        if (this._charModalEsc) document.removeEventListener('keydown', this._charModalEsc);
     },
 
     renderMarauderNav(activeTab) {
@@ -483,16 +480,10 @@ const App = {
             const content = document.getElementById('map-content');
 
             setTimeout(() => {
-                if (msg) {
-                    msg.style.opacity = '0';
-                    msg.style.transition = 'opacity 0.8s';
-                }
+                if (msg) msg.style.opacity = '0';
                 setTimeout(() => {
                     if (msg) msg.style.display = 'none';
-                    if (content) {
-                        content.style.opacity = '1';
-                        content.style.transition = 'opacity 0.8s';
-                    }
+                    if (content) content.style.opacity = '1';
                     this.spawnMapCharacters();
                 }, 800);
             }, 3200);
@@ -508,34 +499,14 @@ const App = {
         SoundEngine.play('modal-close');
 
         const content = document.getElementById('map-content');
-        const msg = document.getElementById('map-opening-msg');
-
         if (content) content.style.opacity = '0';
         
         setTimeout(() => {
-            if (msg) {
-                msg.style.display = 'flex';
-                msg.innerHTML = `<h2 class="map-msg-title" style="animation: mapMsgFade 1.5s ease-out forwards;">Malfeito Feito</h2>`;
-                msg.style.opacity = '1';
-            }
-            setTimeout(() => {
-                open.classList.remove('revealing');
-                open.style.display = 'none';
-                closed.style.display = 'block';
-                closed.classList.remove('unfolding');
-                if (content) content.style.opacity = '0';
-                if (msg) {
-                    msg.style.display = 'flex';
-                    msg.style.opacity = '1';
-                    msg.innerHTML = `
-                        <p class="map-msg-line1">Os Srs. Aluado, Rabicho, Almofadinhas e Pontas</p>
-                        <p class="map-msg-line2">têm o orgulho de apresentar</p>
-                        <h2 class="map-msg-title">O Mapa do Maroto</h2>
-                        <p class="map-msg-oath">Juro solenemente não fazer nada de bom</p>
-                    `;
-                }
-            }, 2000);
-        }, 500);
+            open.classList.remove('revealing');
+            open.style.display = 'none';
+            closed.style.display = 'block';
+            closed.classList.remove('unfolding');
+        }, 800);
     },
 
     spawnMapCharacters() {
@@ -543,113 +514,107 @@ const App = {
         if (!container) return;
         if (this.mapInterval) clearInterval(this.mapInterval);
 
-        const characters = ["Alvo Dumbledore", "Harry Potter", "Hermione Granger", "Severo Snape", "Sirius Black", "Rony Weasley", "Lord Voldemort"];
+        const chars = ["Alvo Dumbledore", "Harry Potter", "Hermione Granger", "Severo Snape", "Sirius Black", "Rony Weasley", "Lord Voldemort"];
         
         const createBlip = () => {
-            const activeScrolls = container.querySelectorAll('.map-scroll');
-            if (activeScrolls.length >= 3) return;
-
-
-            const activeNames = Array.from(activeScrolls).map(s => s.querySelector('span').innerText);
-            const availableCharacters = characters.filter(c => !activeNames.includes(c));
-            
-            if (availableCharacters.length === 0) return;
-
-            const char = availableCharacters[Math.floor(Math.random() * availableCharacters.length)];
+            if (container.querySelectorAll('.map-char-blip').length >= 3) return;
+            const char = chars[Math.floor(Math.random() * chars.length)];
             const blip = document.createElement('div');
             blip.className = 'map-char-blip';
             
             const startX = Math.random() * 70 + 10;
             const startY = Math.random() * 50 + 25;
-            const endX = startX + (Math.random() * 30 - 15);
-            const endY = startY + (Math.random() * 30 - 15);
-            const angle = Math.atan2(endY - startY, endX - startX) * (180 / Math.PI) + 90;
+            const angle = Math.random() * 360;
 
-            blip.style.cssText = `
-                position: absolute;
-                left: ${startX}%;
-                top: ${startY}%;
-                transition: all 12s linear;
-                z-index: 20;
-                opacity: 0;
-            `;
-
+            blip.style.cssText = `position:absolute; left:${startX}%; top:${startY}%; transition:all 12s linear; opacity:0;`;
             blip.innerHTML = `
-                <div class="map-scroll" style="position:relative; display:flex; align-items:center; justify-content:center; padding: 6px 12px; min-width:65px;">
-                    <svg style="position:absolute; inset:0; width:100%; height:100%; z-index:0; filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.1));" viewBox="0 0 120 40" preserveAspectRatio="none">
-                        <path d="M5 2 Q 30 -2, 60 2 T 115 2 L 118 10 Q 120 20, 118 30 L 115 38 Q 90 42, 60 38 T 5 38 L 2 30 Q 0 20, 2 10 Z" fill="#dcd0b9" stroke="#3d2b1f" stroke-width="0.8"/>
-                    </svg>
-                    <span style="position:relative; z-index:1; font-family:'UnifrakturMaguntia'; font-size:0.85rem; white-space:nowrap; letter-spacing:-0.4px; color:#3d2b1f;">${char}</span>
+                <div class="map-scroll" style="display:flex; align-items:center; justify-content:center; padding:6px 12px; background:#dcd0b9; border:1px solid #3d2b1f; border-radius:4px;">
+                    <span style="font-family:'UnifrakturMaguntia'; font-size:0.85rem; color:#3d2b1f;">${char}</span>
                 </div>
             `;
-
             container.appendChild(blip);
             
-
-            let stepCount = 0;
+            let steps = 0;
             const dropStep = setInterval(() => {
-                const rect = blip.getBoundingClientRect();
-                const parentRect = container.getBoundingClientRect();
-                if (rect.width === 0) return;
-
                 const foot = document.createElement('div');
                 foot.innerHTML = '👣';
-                foot.style.cssText = `
-                    position: absolute;
-                    left: ${((rect.left + rect.width/2 - parentRect.left) / parentRect.width) * 100}%;
-                    top: ${((rect.top + rect.height - parentRect.top) / parentRect.height) * 100}%;
-                    transform: translate(-50%, -50%) rotate(${angle}deg) scaleX(${stepCount % 2 === 0 ? 1 : -1});
-                    font-size: 0.8rem;
-                    opacity: 0;
-                    transition: opacity 1s;
-                    color: #3d2b1f;
-                    z-index: 5;
-                `;
+                foot.style.cssText = `position:absolute; left:${blip.offsetLeft}px; top:${blip.offsetTop}px; transform:rotate(${angle}deg) scaleX(${steps%2===0?1:-1}); font-size:0.8rem; opacity:0.6; color:#3d2b1f;`;
                 container.appendChild(foot);
-                
-                setTimeout(() => foot.style.opacity = '0.6', 50);
-                setTimeout(() => {
-                    foot.style.opacity = '0';
-                    setTimeout(() => foot.remove(), 1000);
-                }, 4000);
-                
-                stepCount++;
+                setTimeout(() => { foot.style.opacity = '0'; setTimeout(()=>foot.remove(), 1000); }, 3000);
+                steps++;
             }, 1200);
 
-            setTimeout(() => {
-                blip.style.opacity = '1';
-                blip.style.left = endX + '%';
-                blip.style.top = endY + '%';
-            }, 100);
-
-            setTimeout(() => {
-                clearInterval(dropStep);
-                blip.style.opacity = '0';
-                setTimeout(() => blip.remove(), 2500);
-            }, 11000);
+            setTimeout(() => { blip.style.opacity = '1'; blip.style.left = (startX + 10) + '%'; }, 100);
+            setTimeout(() => { clearInterval(dropStep); blip.style.opacity = '0'; setTimeout(()=>blip.remove(), 2000); }, 11000);
         };
 
         this.mapInterval = setInterval(createBlip, 7000);
     },
 
-    setupSorting() {},
-
-    startSorting() {
+    startSorting(isOpening = false) {
         SoundEngine.play('sorting-start');
         const modal = document.createElement('div');
         modal.id = 'sorting-quiz';
-        modal.className = 'sorting-quiz-modal';
+        modal.className = 'sorting-quiz-modal active';
+        
         modal.innerHTML = `
             <div class="sorting-quiz-inner">
-                <div id="quiz-content">
-                    <h2 style="font-family:var(--font-heading); font-size:3.5rem; margin-bottom:30px; color:var(--neon-color);">O CHAPÉU SELETOR</h2>
-                    <p style="font-size:1.3rem; margin-bottom:50px; opacity:0.8;">"Não há nada escondido em sua cabeça que o Chapéu Seletor não possa ver..."</p>
-                    <button class="btn btn-primary btn-lg" style="padding: 15px 50px; font-weight:bold;" onclick="App.renderSortingQuestion(0)">COMEÇAR SELEÇÃO</button>
+                <div id="quiz-content" style="width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                    <div id="hat-ceremony" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+                        <div style="margin-bottom: 30px;">
+                            <img src="src/assets/images/sorting-hat.png" id="sorting-hat-img" style="width: 300px; display: block; margin: 0 auto;">
+                        </div>
+                        <div id="hat-speech" style="font-family: var(--font-prophet); font-size: 2.2rem; line-height: 1.6; min-height: 150px; color: var(--text-gold); text-shadow: 0 0 10px rgba(255,215,0,0.3); max-width: 800px; margin: 0 auto;"></div>
+                        <div id="quiz-actions" style="margin-top: 60px; opacity: 0; transition: opacity 1s;">
+                            <button class="btn btn-primary btn-lg" style="padding: 20px 60px; font-weight:bold; border-radius: 50px; box-shadow: var(--neon-glow);" onclick="App.renderSortingQuestion(0)">COMEÇAR SELEÇÃO</button>
+                        </div>
+                    </div>
                 </div>
-                <button class="close-btn" onclick="this.parentElement.parentElement.remove()" style="background:none; border:none; color:#fff; font-size:2rem; cursor:pointer;">✕</button>
+                ${!isOpening ? '<button class="close-btn" onclick="this.parentElement.parentElement.remove()" style="background:none; border:none; color:#fff; font-size:2.5rem; cursor:pointer; position:absolute; top:40px; right:40px;">✕</button>' : ''}
             </div>
         `;
         document.body.appendChild(modal);
+
+        const speech = [
+            "Hmm... difícil. Muito difícil.",
+            "Muita coragem, estou vendo. Uma mente nada má, também.",
+            "Há talento, ah, minha nossa, sim...",
+            "E uma sede de se provar, isso é interessante...",
+            "Então, onde devo colocá-lo?"
+        ];
+
+        this.typeWriter(speech, 'hat-speech', () => {
+            document.getElementById('quiz-actions').style.opacity = '1';
+        });
+    },
+
+    typeWriter(lines, elementId, callback) {
+        const el = document.getElementById(elementId);
+        let lineIdx = 0;
+        let charIdx = 0;
+
+        const type = () => {
+            if (lineIdx < lines.length) {
+                if (charIdx < lines[lineIdx].length) {
+                    el.innerHTML = lines[lineIdx].substring(0, charIdx + 1) + '<span style="animation: blink 0.8s infinite;">|</span>';
+                    charIdx++;
+                    setTimeout(type, 50);
+                } else {
+                    setTimeout(() => {
+                        lineIdx++;
+                        charIdx = 0;
+                        if (lineIdx < lines.length) {
+                            el.innerHTML = '';
+                            type();
+                        } else {
+                            el.innerHTML = lines[lines.length - 1];
+                            if (callback) callback();
+                        }
+                    }, 1200);
+                }
+            }
+        };
+        type();
     },
 
     renderSortingQuestion(index) {
@@ -657,15 +622,12 @@ const App = {
         if (!q) return;
         const container = document.getElementById('quiz-content');
         
-
-        const shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
-
         container.innerHTML = `
             <div class="question-step" style="animation: fadeInUp 0.5s;">
-                <h3 style="font-size:2.2rem; margin-bottom:50px; font-family:var(--font-display);">${q.text}</h3>
-                <div class="quiz-question-options" style="display:grid; grid-template-columns: 1fr 1fr; gap:25px;">
-                    ${shuffledOptions.map((o, i) => `
-                        <button class="btn btn-ghost" style="padding: 20px; font-size:1.1rem; border:1px solid rgba(255,255,255,0.1); border-radius:12px;" onclick="App.handleAnswer(${index}, '${o.house}')">${o.text}</button>
+                <h3 style="font-size:2.5rem; margin-bottom:60px; font-family:var(--font-display); color: var(--text-gold);">${q.text}</h3>
+                <div class="quiz-question-options" style="display:grid; grid-template-columns: 1fr 1fr; gap:30px;">
+                    ${q.options.map((o, i) => `
+                        <button class="btn btn-ghost" style="padding: 25px; font-size:1.2rem; border:1px solid rgba(255,255,255,0.1); border-radius:15px; backdrop-filter: blur(10px);" onclick="App.handleAnswer(${index}, '${o.house}')">${o.text}</button>
                     `).join('')}
                 </div>
             </div>
@@ -673,7 +635,6 @@ const App = {
     },
 
     handleAnswer(index, house) {
-        if (!this.answers) this.answers = [];
         this.answers.push(house);
         if (index < QUESTIONS.length - 1) {
             this.renderSortingQuestion(index + 1);
@@ -688,15 +649,12 @@ const App = {
         const result = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
         
         const container = document.getElementById('quiz-content');
-        
-
         container.innerHTML = `
             <div style="text-align:center; animation: fadeIn 0.5s;">
                 <h2 style="font-family:var(--font-heading); font-size:4rem; color:var(--text-gold); letter-spacing:10px; animation: pulse 1.5s infinite;">DECIDINDO...</h2>
-                <p style="font-size:1.4rem; opacity:0.6; margin-top:20px;">O Chapéu Seletor está lendo sua mente...</p>
+                <p style="font-size:1.5rem; opacity:0.6; margin-top:20px;">O Chapéu Seletor está lendo sua mente...</p>
             </div>
         `;
-
 
         setTimeout(() => {
             const overlay = document.createElement('div');
@@ -711,7 +669,6 @@ const App = {
             document.body.appendChild(overlay);
             SoundEngine.play('wand-clash');
 
-
             setTimeout(() => {
                 this.userHouse = result;
                 localStorage.setItem('userHouse', result);
@@ -719,8 +676,6 @@ const App = {
                 this.answers = [];
                 SoundEngine.play('house-reveal');
 
-                overlay.innerHTML += '<div class="shockwave" style="animation-delay: 0.2s; border-color: var(--neon-color);"></div>';
-                
                 setTimeout(() => {
                     overlay.classList.remove('active');
                     setTimeout(() => overlay.remove(), 500);
@@ -760,12 +715,7 @@ const App = {
         for (let i = 0; i < 50; i++) {
             const p = document.createElement('div');
             p.className = 'particle';
-            p.style.cssText = `
-                --x: ${Math.random() * 100}%;
-                --y: ${Math.random() * 100}%;
-                --duration: ${8 + Math.random() * 12}s;
-                --delay: ${Math.random() * 5}s;
-            `;
+            p.style.cssText = `--x:${Math.random()*100}%; --y:${Math.random()*100}%; --duration:${8+Math.random()*12}s; --delay:${Math.random()*5}s;`;
             container.appendChild(p);
         }
     },
@@ -774,11 +724,8 @@ const App = {
         if (!container) return;
         const cards = container.querySelectorAll('.accordion-card');
         if (cards.length === 0) return;
-        
-
         cards.forEach(c => c.classList.remove('active'));
         cards[0].classList.add('active');
-
         cards.forEach(card => {
             card.addEventListener('click', () => {
                 cards.forEach(c => c.classList.remove('active'));

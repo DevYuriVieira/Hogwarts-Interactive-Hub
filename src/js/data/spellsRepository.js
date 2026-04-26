@@ -201,7 +201,7 @@ const SPELLS = [
         id: 23,
         name: "Impedimenta",
         type: "Feitiço de Impedimento",
-        effect: "Atrasa, congela temporariamente ou empurra para trás um alvo que está se aproximando.",
+        effect: "Atrasa, conjela temporariamente ou empurra para trás um alvo que está se aproximando.",
         color: "#aa88ff",
         icon: "🛑",
         animation: "impedimenta-stop"

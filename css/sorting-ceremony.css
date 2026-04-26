@@ -1,0 +1,280 @@
+/* ============================================
+   SORTING CEREMONY — Full Experience
+   ============================================ */
+
+/* ---- Overlay ---- */
+.sorting-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-sorting);
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s;
+}
+
+.sorting-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* ---- Welcome screen ---- */
+.sorting-welcome {
+    text-align: center;
+    animation: fadeInUp 1s var(--ease-out);
+}
+
+.sorting-welcome h2 {
+    font-family: var(--font-display);
+    font-size: var(--fs-3xl);
+    color: var(--text-gold);
+    margin-bottom: var(--space-md);
+}
+
+.sorting-welcome p {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-2xl);
+    max-width: 450px;
+}
+
+.sorting-hat-img {
+    width: 280px;
+    height: auto;
+    margin-bottom: var(--space-xl);
+    animation: float 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px rgba(200, 169, 81, 0.4));
+    border-radius: var(--radius-lg);
+}
+
+/* ---- Question screen ---- */
+.sorting-question {
+    text-align: center;
+    max-width: 600px;
+    padding: var(--space-xl);
+    animation: fadeInScale 0.6s var(--ease-out);
+}
+
+.sorting-progress {
+    display: flex;
+    gap: var(--space-sm);
+    justify-content: center;
+    margin-bottom: var(--space-2xl);
+}
+
+.sorting-progress-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: all var(--transition-normal);
+}
+
+.sorting-progress-dot.filled {
+    background: var(--text-gold);
+    border-color: var(--text-gold);
+    box-shadow: 0 0 10px rgba(200, 169, 81, 0.5);
+}
+
+.sorting-progress-dot.current {
+    border-color: var(--text-gold);
+    box-shadow: 0 0 10px rgba(200, 169, 81, 0.3);
+    animation: pulseGlow 2s infinite;
+}
+
+.sorting-question h3 {
+    font-family: var(--font-heading);
+    font-size: var(--fs-xl);
+    color: var(--text-primary);
+    margin-bottom: var(--space-2xl);
+    line-height: var(--lh-relaxed);
+}
+
+.sorting-options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.sorting-option {
+    padding: var(--space-md) var(--space-lg);
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius-lg);
+    font-family: var(--font-heading);
+    font-size: var(--fs-base);
+    color: var(--text-secondary);
+    text-align: left;
+    transition: all var(--transition-normal);
+}
+
+.sorting-option:hover {
+    background: rgba(255,255,255,0.06);
+    border-color: var(--text-gold);
+    color: var(--text-primary);
+    box-shadow: 0 0 15px rgba(200, 169, 81, 0.15);
+    transform: translateX(4px);
+}
+
+.sorting-option:active {
+    transform: translateX(2px) scale(0.99);
+}
+
+/* ---- Wand Ceremony ---- */
+.wand-ceremony {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.wand-ceremony.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.wand-svg-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+}
+
+.wand-svg-container svg {
+    width: 100%;
+    height: 100%;
+}
+
+.wand-svg-container .crest-stroke {
+    fill: none;
+    stroke: var(--neon-color);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 6px var(--neon-color)) drop-shadow(0 0 12px var(--neon-color));
+    animation: glowPulse 2s ease-in-out infinite;
+}
+
+.wand-element {
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 120px;
+    background: linear-gradient(to top, #8B7355, #D4A843, #FFF8DC);
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(212, 168, 67, 0.5);
+    opacity: 0;
+}
+
+.wand-element.visible {
+    opacity: 1;
+    animation: fadeIn 0.5s var(--ease-out);
+}
+
+.wand-tip-glow {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--neon-color);
+    box-shadow: var(--neon-glow-strong);
+    animation: pulseGlow 1s infinite;
+}
+
+/* ---- House Reveal ---- */
+.house-reveal {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: var(--space-xl);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.house-reveal.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.house-reveal-flash {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, var(--neon-color), transparent 70%);
+    animation: flashBackground 1.5s var(--ease-out) forwards;
+}
+
+.house-reveal-crest-img {
+    width: 200px;
+    height: auto;
+    animation: flashReveal 1.2s var(--ease-spring) forwards;
+    filter: drop-shadow(0 0 30px rgba(var(--neon-color-rgb), 0.6));
+    z-index: 2;
+    border-radius: var(--radius-lg);
+}
+
+.house-reveal-name {
+    font-family: var(--font-display);
+    font-size: var(--fs-4xl);
+    color: var(--neon-color);
+    text-shadow: var(--neon-glow-strong);
+    animation: fadeInUp 0.8s var(--ease-out) 0.8s both;
+    z-index: 2;
+}
+
+.house-reveal-message {
+    font-family: var(--font-heading);
+    font-size: var(--fs-md);
+    color: var(--text-secondary);
+    animation: fadeInUp 0.8s var(--ease-out) 1.2s both;
+    z-index: 2;
+    max-width: 400px;
+    text-align: center;
+}
+
+.house-reveal-enter {
+    animation: fadeInUp 0.8s var(--ease-out) 2s both;
+    z-index: 2;
+}
+
+/* ---- Particles during ceremony ---- */
+.ceremony-particles {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.ceremony-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--neon-color);
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--neon-color);
+    animation: particleFloat linear infinite;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+    .sorting-welcome h2 { font-size: var(--fs-2xl); }
+    .sorting-hat-icon { font-size: 4rem; }
+    .sorting-question h3 { font-size: var(--fs-lg); }
+    .wand-svg-container { width: 200px; height: 200px; }
+    .house-reveal-crest { font-size: 5rem; }
+    .house-reveal-name { font-size: var(--fs-2xl); }
+}

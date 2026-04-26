@@ -1,0 +1,156 @@
+/* ============================================
+   DESIGN TOKENS — Mundo Bruxo
+   ============================================ */
+
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=UnifrakturMaguntia&display=swap');
+
+:root {
+    /* ---- Background ---- */
+    --bg-primary: #0a0a0f;
+    --bg-secondary: #111118;
+    --bg-tertiary: #1a1a2e;
+    --bg-card: #16161f;
+    --bg-card-hover: #1e1e2f;
+    --bg-overlay: rgba(0, 0, 0, 0.85);
+    --bg-glass: rgba(22, 22, 31, 0.7);
+
+    /* ---- Text ---- */
+    --text-primary: #e8e6e3;
+    --text-secondary: #a09c97;
+    --text-muted: #5a5652;
+    --text-gold: #c8a951;
+
+    /* ---- Default Accent (before sorting) ---- */
+    --primary-color: #c0a36e;
+    --primary-color-rgb: 192, 163, 110;
+    --accent-color: #d4a843;
+    --accent-color-rgb: 212, 168, 67;
+    --neon-color: #ffd700;
+    --neon-color-rgb: 255, 215, 0;
+    --neon-glow: 0 0 7px var(--neon-color), 0 0 15px var(--neon-color), 0 0 30px var(--neon-color);
+    --neon-glow-strong: 0 0 10px var(--neon-color), 0 0 20px var(--neon-color), 0 0 40px var(--neon-color), 0 0 80px var(--neon-color);
+    --house-gradient: linear-gradient(135deg, #c0a36e, #8b7340, #d4a843);
+
+    /* ---- Typography ---- */
+    --font-display: 'Cinzel Decorative', serif;
+    --font-heading: 'Cinzel', serif;
+    --font-body: 'Inter', sans-serif;
+    --font-prophet: 'UnifrakturMaguntia', cursive;
+
+    --fs-xs: 0.75rem;
+    --fs-sm: 0.875rem;
+    --fs-base: 1rem;
+    --fs-md: 1.125rem;
+    --fs-lg: 1.25rem;
+    --fs-xl: 1.5rem;
+    --fs-2xl: 2rem;
+    --fs-3xl: 2.5rem;
+    --fs-4xl: 3.5rem;
+    --fs-5xl: 4.5rem;
+
+    --fw-light: 300;
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+    --fw-black: 900;
+
+    --lh-tight: 1.1;
+    --lh-normal: 1.5;
+    --lh-relaxed: 1.75;
+
+    /* ---- Spacing ---- */
+    --space-2xs: 0.125rem;
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+    --space-3xl: 4rem;
+    --space-4xl: 6rem;
+
+    /* ---- Border Radius ---- */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 20px;
+    --radius-full: 9999px;
+
+    /* ---- Transitions ---- */
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --transition-fast: 150ms var(--ease-out);
+    --transition-normal: 300ms var(--ease-out);
+    --transition-slow: 500ms var(--ease-out);
+    --transition-grid: 700ms var(--ease-in-out);
+
+    /* ---- Z-Index Scale ---- */
+    --z-base: 1;
+    --z-card: 10;
+    --z-navbar: 100;
+    --z-overlay: 500;
+    --z-modal: 600;
+    --z-sorting: 1000;
+    --z-pensieve: 900;
+
+    /* ---- Shadows ---- */
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+    --shadow-lg: 0 8px 30px rgba(0,0,0,0.5);
+    --shadow-xl: 0 16px 50px rgba(0,0,0,0.6);
+}
+
+/* ============================================
+   HOUSE THEMES
+   ============================================ */
+
+body.theme-gryffindor {
+    --primary-color: #AE0001;
+    --primary-color-rgb: 174, 0, 1;
+    --accent-color: #EEBA30;
+    --accent-color-rgb: 238, 186, 48;
+    --neon-color: #FF4444;
+    --neon-color-rgb: 255, 68, 68;
+    --neon-glow: 0 0 7px #FF4444, 0 0 15px #FF4444, 0 0 30px #AE0001;
+    --neon-glow-strong: 0 0 10px #FF4444, 0 0 20px #FF4444, 0 0 40px #AE0001, 0 0 80px #AE0001;
+    --house-gradient: linear-gradient(135deg, #AE0001, #740001, #EEBA30);
+}
+
+body.theme-slytherin {
+    --primary-color: #1A472A;
+    --primary-color-rgb: 26, 71, 42;
+    --accent-color: #5D5D5D;
+    --accent-color-rgb: 93, 93, 93;
+    --neon-color: #00FF88;
+    --neon-color-rgb: 0, 255, 136;
+    --neon-glow: 0 0 7px #00FF88, 0 0 15px #00FF88, 0 0 30px #1A472A;
+    --neon-glow-strong: 0 0 10px #00FF88, 0 0 20px #00FF88, 0 0 40px #1A472A, 0 0 80px #1A472A;
+    --house-gradient: linear-gradient(135deg, #1A472A, #0D2818, #5D5D5D);
+}
+
+body.theme-ravenclaw {
+    --primary-color: #0E1A40;
+    --primary-color-rgb: 14, 26, 64;
+    --accent-color: #946B2D;
+    --accent-color-rgb: 148, 107, 45;
+    --neon-color: #4488FF;
+    --neon-color-rgb: 68, 136, 255;
+    --neon-glow: 0 0 7px #4488FF, 0 0 15px #4488FF, 0 0 30px #0E1A40;
+    --neon-glow-strong: 0 0 10px #4488FF, 0 0 20px #4488FF, 0 0 40px #0E1A40, 0 0 80px #0E1A40;
+    --house-gradient: linear-gradient(135deg, #0E1A40, #0A1230, #946B2D);
+}
+
+body.theme-hufflepuff {
+    --primary-color: #ECB939;
+    --primary-color-rgb: 236, 185, 57;
+    --accent-color: #372E29;
+    --accent-color-rgb: 55, 46, 41;
+    --neon-color: #FFD700;
+    --neon-color-rgb: 255, 215, 0;
+    --neon-glow: 0 0 7px #FFD700, 0 0 15px #FFD700, 0 0 30px #ECB939;
+    --neon-glow-strong: 0 0 10px #FFD700, 0 0 20px #FFD700, 0 0 40px #ECB939, 0 0 80px #ECB939;
+    --house-gradient: linear-gradient(135deg, #ECB939, #C99A2E, #372E29);
+}

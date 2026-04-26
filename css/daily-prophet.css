@@ -1,0 +1,244 @@
+/* ============================================
+   DAILY PROPHET — Newspaper Style
+   ============================================ */
+
+.daily-prophet {
+    background: #f4e8c1;
+    color: #2a1a0a;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    position: relative;
+    box-shadow: var(--shadow-xl), 0 0 60px rgba(244, 232, 193, 0.1);
+}
+
+.daily-prophet::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(0,0,0,0.03) 28px, rgba(0,0,0,0.03) 29px),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+}
+
+.prophet-header {
+    text-align: center;
+    padding: var(--space-2xl) var(--space-xl) var(--space-lg);
+    border-bottom: 3px double #2a1a0a;
+    position: relative;
+    z-index: 1;
+}
+
+.prophet-masthead {
+    font-family: var(--font-prophet);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: #2a1a0a;
+    letter-spacing: 0.05em;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+    margin-bottom: var(--space-xs);
+}
+
+.prophet-date {
+    font-family: 'Cinzel', serif;
+    font-size: var(--fs-xs);
+    color: #5a4a2a;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.prophet-motto {
+    font-style: italic;
+    font-size: var(--fs-xs);
+    color: #7a6a4a;
+    margin-top: var(--space-2xs);
+}
+
+.prophet-body {
+    padding: var(--space-xl);
+    position: relative;
+    z-index: 1;
+}
+
+.prophet-headline {
+    font-family: var(--font-heading);
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    color: #1a0a00;
+    text-align: center;
+    margin-bottom: var(--space-lg);
+    line-height: var(--lh-tight);
+    font-weight: var(--fw-black);
+}
+
+.prophet-subheadline {
+    font-family: var(--font-heading);
+    font-size: var(--fs-md);
+    color: #3a2a1a;
+    text-align: center;
+    margin-bottom: var(--space-xl);
+    font-style: italic;
+}
+
+.prophet-columns {
+    column-count: 2;
+    column-gap: var(--space-xl);
+    column-rule: 1px solid rgba(42, 26, 10, 0.2);
+    font-family: 'Georgia', serif;
+    font-size: var(--fs-sm);
+    line-height: 1.7;
+    color: #3a2a1a;
+    text-align: justify;
+}
+
+.prophet-columns p {
+    color: #3a2a1a;
+    margin-bottom: var(--space-md);
+}
+
+.prophet-columns p::first-letter {
+    font-family: var(--font-prophet);
+    font-size: 2.5em;
+    float: left;
+    line-height: 0.8;
+    margin-right: 4px;
+    color: #2a1a0a;
+}
+
+/* Moving photo — like magical newspaper */
+.prophet-photo {
+    position: relative;
+    margin: var(--space-lg) auto;
+    border: 3px solid #2a1a0a;
+    overflow: hidden;
+    max-width: 100%;
+    aspect-ratio: 16/9;
+    background: linear-gradient(135deg, #2a1a0a, #4a3a2a);
+}
+
+.prophet-photo-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    animation: photoWiggle 4s ease-in-out infinite;
+    background: linear-gradient(135deg, #1a1a2e, #2a2a4e);
+    color: #e8e6e3;
+}
+
+.prophet-photo-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--space-xs) var(--space-sm);
+    background: rgba(42, 26, 10, 0.85);
+    font-family: 'Georgia', serif;
+    font-size: var(--fs-xs);
+    font-style: italic;
+    color: #f4e8c1;
+    text-align: center;
+}
+
+/* Countdown */
+.prophet-countdown {
+    text-align: center;
+    padding: var(--space-xl);
+    border-top: 1px solid rgba(42, 26, 10, 0.2);
+    border-bottom: 1px solid rgba(42, 26, 10, 0.2);
+    margin: var(--space-lg) 0;
+}
+
+.prophet-countdown-label {
+    font-family: var(--font-heading);
+    font-size: var(--fs-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #5a4a2a;
+    margin-bottom: var(--space-md);
+}
+
+.prophet-countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-lg);
+}
+
+.countdown-unit {
+    text-align: center;
+}
+
+.countdown-value {
+    font-family: var(--font-display);
+    font-size: var(--fs-3xl);
+    color: #2a1a0a;
+    line-height: 1;
+}
+
+.countdown-label {
+    font-size: var(--fs-xs);
+    color: #7a6a4a;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: var(--space-2xs);
+}
+
+/* Cast grid */
+.prophet-cast {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+}
+
+.prophet-cast-member {
+    text-align: center;
+    padding: var(--space-md);
+    border: 1px solid rgba(42, 26, 10, 0.15);
+    border-radius: var(--radius-md);
+    transition: all var(--transition-normal);
+}
+
+.prophet-cast-member:hover {
+    background: rgba(42, 26, 10, 0.05);
+    border-color: rgba(42, 26, 10, 0.3);
+}
+
+.prophet-cast-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 0 auto var(--space-sm);
+    background: linear-gradient(135deg, #2a1a0a, #5a4a2a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #f4e8c1;
+    border: 2px solid rgba(42, 26, 10, 0.3);
+}
+
+.prophet-cast-name {
+    font-family: var(--font-heading);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-bold);
+    color: #2a1a0a;
+    margin-bottom: 2px;
+}
+
+.prophet-cast-role {
+    font-size: var(--fs-xs);
+    color: #7a6a4a;
+    font-style: italic;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+    .prophet-columns {
+        column-count: 1;
+    }
+    .prophet-cast {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+}

@@ -1,5 +1,4 @@
 
-
 class CardCarouselUI {
     static renderAccordionCard(item, index, type) {
         const posterSrc = item.poster || '';
@@ -28,7 +27,6 @@ class CardCarouselUI {
 
         const hasPoster = !!item.poster;
 
-        
         return `
             <div class="accordion-card ${!hasPoster ? 'no-poster' : ''}" data-index="${index}">
                 <div class="accordion-card-blur" style="background: ${hasPoster ? `url('${posterSrc}')` : item.gradient || 'var(--bg-card)'}; background-size: cover;"></div>

@@ -362,23 +362,35 @@ main {
 .sorting-quiz-modal {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.95);
-    z-index: 1000;
+    background: #000 !important;
+    z-index: 20000;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    backdrop-filter: blur(10px);
+    text-align: center;
+    padding: 0;
+    margin: 0;
 }
 
 .sorting-quiz-inner {
-    max-width: 800px;
-    width: 100%;
-    padding: 60px;
-    background: var(--bg-card);
-    border: 1px solid var(--primary-color);
-    border-radius: 12px;
-    text-align: center;
-    position: relative;
+    width: 100% !important;
+    max-width: 1000px !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto !important;
+}
+
+.sorting-quiz-inner *, 
+.sorting-quiz-inner img {
+    animation: none !important;
+    border: none !important;
+    box-shadow: none !important;
 }
 
 .close-btn {
