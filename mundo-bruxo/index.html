@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mundo Bruxo — Portal imersivo do universo de Harry Potter. Descubra sua casa de Hogwarts, explore filmes, livros, feitiços e a nova série HBO.">
+    <meta name="keywords" content="Harry Potter, Hogwarts, Mundo Bruxo, Chapéu Seletor, Grifinória, Sonserina, Corvinal, Lufa-Lufa, Série HBO, Feitiços, Mapa do Maroto">
+    <meta name="author" content="Mundo Bruxo">
+    <meta name="theme-color" content="#0a0a0f">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="Mundo Bruxo — Portal do Universo Harry Potter">
+    <meta property="og:description" content="Descubra sua casa de Hogwarts, explore a saga completa dos filmes, livros, games e a nova série HBO. Portal imersivo com efeitos mágicos.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Mundo Bruxo — Portal do Universo Harry Potter">
+    <meta name="twitter:description" content="Descubra sua casa, explore filmes, livros e feitiços do universo bruxo.">
+
+    <title>Mundo Bruxo — Universo Harry Potter</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="src/css/themes.css">
+    <link rel="stylesheet" href="src/css/base.css">
+    <link rel="stylesheet" href="src/css/layout.css">
+    <link rel="stylesheet" href="src/css/cards.css">
+    <link rel="stylesheet" href="src/css/animations.css">
+    <link rel="stylesheet" href="src/css/responsive.css">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Mundo Bruxo",
+        "description": "Portal imersivo do universo de Harry Potter",
+        "url": "https://mundobruxo.com",
+        "inLanguage": "pt-BR",
+        "genre": "Fan Site",
+        "about": {
+            "@type": "CreativeWorkSeries",
+            "name": "Harry Potter"
+        }
+    }
+    </script>
+</head>
+<body>
+    <div class="particles-container" id="particles" aria-hidden="true"></div>
+
+    <div class="sorting-overlay" id="sorting-overlay" aria-hidden="true"></div>
+
+    <nav class="navbar" id="main-navbar" role="navigation" aria-label="Navegação principal">
+        <div class="navbar-inner">
+            <div class="navbar-brand">
+                <a href="#" class="navbar-logo" data-page="home" onclick="event.preventDefault(); App.navigate('home')" aria-label="Página inicial">
+                    ⚡ Mundo Bruxo
+                </a>
+            </div>
+
+            <ul class="navbar-nav" id="navbar-nav" role="menubar">
+                <li role="none"><a href="#" class="nav-link active" data-page="home" role="menuitem" aria-selected="true" onclick="event.preventDefault(); App.navigate('home')">Início</a></li>
+                <li role="none"><a href="#" class="nav-link" data-page="movies" role="menuitem" onclick="event.preventDefault(); App.navigate('movies')">Filmes</a></li>
+                <li role="none"><a href="#" class="nav-link" data-page="books" role="menuitem" onclick="event.preventDefault(); App.navigate('books')">Livros</a></li>
+                <li role="none"><a href="#" class="nav-link" data-page="series" role="menuitem" onclick="event.preventDefault(); App.navigate('series')">Série HBO</a></li>
+                <li role="none"><a href="#" class="nav-link" data-page="games" role="menuitem" onclick="event.preventDefault(); App.navigate('games')">Games</a></li>
+                <li role="none"><a href="#" class="nav-link" data-page="spells" role="menuitem" onclick="event.preventDefault(); App.navigate('spells')">Feitiços</a></li>
+                <li role="none"><a href="#" class="nav-link" data-page="characters" role="menuitem" onclick="event.preventDefault(); App.navigate('characters')">Personagens</a></li>
+            </ul>
+
+            <div class="navbar-actions">
+                <button class="btn btn-ghost" id="btn-sound" title="Ativar/Desativar Som" onclick="SoundEngine.toggle()" aria-label="Toggle som" style="min-width:auto; padding:8px 14px; font-size:1.2rem;">🔊</button>
+                <button class="btn btn-ghost btn-resort" id="btn-resort" title="Refazer Seleção" onclick="App.startSorting()" aria-label="Refazer seleção da casa">
+                    🎩 Re-selecionar
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main role="main">
+        <div class="page active" id="page-home"></div>
+        <div class="page" id="page-movies"></div>
+        <div class="page" id="page-books"></div>
+        <div class="page" id="page-series"></div>
+        <div class="page" id="page-games"></div>
+        <div class="page" id="page-spells"></div>
+        <div class="page" id="page-characters"></div>
+    </main>
+
+    <footer style="text-align:center; padding: var(--space-4xl) var(--space-xl); color: #fff; background: rgba(0,0,0,0.4); border-top: 1px solid rgba(255,255,255,0.1); position:relative; z-index:1;" role="contentinfo">
+        <div style="font-family: var(--font-heading); color: var(--neon-color); font-size: 1.5rem; margin-bottom: var(--space-lg); letter-spacing: 3px; text-shadow: var(--neon-glow);">⚡ MUNDO BRUXO</div>
+        <div style="margin-bottom: var(--space-xl);">
+            <input type="text" id="spell-input" placeholder='Digite "lumos" ou "nox"...'
+                   style="padding: 12px 25px; border-radius: 30px; border: 1px solid var(--neon-color); background: rgba(0,0,0,0.5); color: #fff; width: 300px; text-align: center; font-size: 1rem; outline: none; transition: all 0.3s; box-shadow: 0 0 10px rgba(var(--neon-color-rgb), 0.2);"
+                   onfocus="this.style.boxShadow='0 0 20px var(--neon-color)'" onblur="this.style.boxShadow='0 0 10px rgba(var(--neon-color-rgb), 0.2)'"
+                   aria-label="Campo de feitiços">
+        </div>
+        <p style="margin-bottom: 8px; opacity:0.9; font-size: 0.95rem;">Site fan-made criado com ✨ magia e código.</p>
+        <p style="max-width: 700px; margin: 0 auto 25px auto; line-height: 1.6; opacity:0.7; font-size: 0.85rem;">Todos os direitos sobre Harry Potter pertencem a J.K. Rowling e Warner Bros.</p>
+        <div style="width: 100px; height: 3px; background: var(--neon-color); margin: 0 auto 30px auto; opacity: 1; box-shadow: var(--neon-glow-strong); border-radius: 10px;"></div>
+        <p style="font-weight:bold; letter-spacing:1px;">© 2026 Mundo Bruxo · Fan Project · Dica: digite "lumos" ✨</p>
+    </footer>
+
+    <script src="src/js/data/moviesRepository.js"></script>
+    <script src="src/js/data/fbRepository.js"></script>
+    <script src="src/js/data/booksRepository.js"></script>
+    <script src="src/js/data/gamesRepository.js"></script>
+    <script src="src/js/data/spellsRepository.js"></script>
+    <script src="src/js/data/seriesRepository.js"></script>
+    <script src="src/js/data/questionsRepository.js"></script>
+    <script src="src/js/data/quotesRepository.js"></script>
+    <script src="src/js/data/charactersRepository.js"></script>
+    <script src="src/js/ui/CardCarouselUI.js"></script>
+    <script src="src/js/soundEngine.js"></script>
+    <script src="src/js/app.js"></script>
+</body>
+</html>

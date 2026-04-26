@@ -1,0 +1,122 @@
+const GAMES = [
+    {
+        id: 1,
+        title: "Harry Potter e a Pedra Filosofal",
+        titleEn: "Harry Potter and the Philosopher's Stone",
+        year: 2001,
+        platforms: ['PS1', 'PC', 'GBC', 'GBA'],
+        genre: 'Aventura / Plataforma',
+        emoji: '<i class="fa-regular fa-gem"></i>',
+        gradient: 'linear-gradient(135deg, #5b2c8e, #8e44ad, #c39bd3)',
+        synopsis: 'O primeiro jogo da saga — icônico no PS1 com sua jogabilidade de plataforma 3D. Explore Hogwarts, colete os feijõezinhos de todos os sabores, aprenda Flipendo e Lumos, e enfrente Voldemort na câmara do espelho.',
+        poster: ""
+    },
+    {
+        id: 2,
+        title: "Harry Potter e a Câmara Secreta",
+        titleEn: "Harry Potter and the Chamber of Secrets",
+        year: 2002,
+        platforms: ['PS1', 'PS2', 'PC', 'Xbox', 'GCN', 'GBA'],
+        genre: 'Aventura / Ação',
+        emoji: '<i class="fa-solid fa-staff-snake"></i>',
+        gradient: 'linear-gradient(135deg, #145a32, #1e8449, #27ae60)',
+        synopsis: 'Hogwarts em mundo aberto pela primeira vez. Voe de Nimbus 2000, duela com Malfoy, enfrente aranhas gigantes na Floresta Proibida e desça até a Câmara Secreta para enfrentar o Basilisco.',
+        poster: ""
+    },
+    {
+        id: 3,
+        title: "Harry Potter: Quidditch World Cup",
+        titleEn: "Harry Potter: Quidditch World Cup",
+        year: 2003,
+        platforms: ['PS2', 'PC', 'Xbox', 'GCN', 'GBA'],
+        genre: 'Esportes',
+        emoji: '<i class="fa-solid fa-quidditch"></i>',
+        gradient: 'linear-gradient(135deg, #d4a017, #f39c12, #f1c40f)',
+        synopsis: 'O único jogo dedicado exclusivamente ao Quadribol! Jogue como artilheiro, batedor e apanhador. Dispute a Copa das Casas de Hogwarts e depois a Copa Mundial de Quadribol com seleções de vários países.',
+        poster: ""
+    },
+    {
+        id: 4,
+        title: "Harry Potter e o Prisioneiro de Azkaban",
+        titleEn: "Harry Potter and the Prisoner of Azkaban",
+        year: 2004,
+        platforms: ['PS2', 'PC', 'Xbox', 'GCN', 'GBA'],
+        genre: 'Aventura',
+        emoji: '<i class="fa-solid fa-paw"></i>',
+        gradient: 'linear-gradient(135deg, #1a3a5c, #2e6da4, #5dade2)',
+        synopsis: 'Jogue alternando entre Harry, Ron e Hermione — cada um com habilidades únicas. Monte no Bicuço, lance o Patrono contra Dementadores e explore os segredos do Mapa do Maroto.',
+        poster: ""
+    },
+    {
+        id: 5,
+        title: "Harry Potter e o Cálice de Fogo",
+        titleEn: "Harry Potter and the Goblet of Fire",
+        year: 2005,
+        platforms: ['PS2', 'PSP', 'PC', 'Xbox', 'GCN', 'GBA', 'NDS'],
+        genre: 'Aventura / Co-op',
+        emoji: '<i class="fa-solid fa-trophy"></i>',
+        gradient: 'linear-gradient(135deg, #922b21, #c0392b, #e74c3c)',
+        synopsis: 'Cooperativo para até 3 jogadores! Enfrente o Rabo-Córneo Húngaro, mergulhe no Lago Negro e sobreviva ao labirinto mortal do Torneio Tribruxo.',
+        poster: ""
+    },
+    {
+        id: 6,
+        title: "Harry Potter e a Ordem da Fênix",
+        titleEn: "Harry Potter and the Order of the Phoenix",
+        year: 2007,
+        platforms: ['PS2', 'PS3', 'PSP', 'Xbox 360', 'Wii', 'PC', 'NDS'],
+        genre: 'Aventura / Mundo Aberto',
+        emoji: '<i class="fa-solid fa-feather"></i>',
+        gradient: 'linear-gradient(135deg, #4a235a, #6c3483, #a569bd)',
+        synopsis: 'Hogwarts completamente explorável em 3D pela primeira vez no PS3/Xbox 360. Recrute membros para a Armada de Dumbledore, aprenda feitiços e enfrente Umbridge.',
+        poster: ""
+    },
+    {
+        id: 7,
+        title: "LEGO Harry Potter: Anos 1-4",
+        titleEn: "LEGO Harry Potter: Years 1-4",
+        year: 2010,
+        platforms: ['PS3', 'Xbox 360', 'Wii', 'PC', 'PSP', 'NDS'],
+        genre: 'Aventura / Puzzle',
+        emoji: '<i class="fa-solid fa-cubes"></i>',
+        gradient: 'linear-gradient(135deg, #d4ac0d, #f39c12, #e74c3c)',
+        synopsis: 'Reviva os 4 primeiros anos de Harry em Hogwarts no estilo LEGO. Centenas de personagens desbloqueáveis, feitiços para construir e destruir, e o humor clássico da franquia LEGO.',
+        poster: ""
+    },
+    {
+        id: 8,
+        title: "LEGO Harry Potter: Anos 5-7",
+        titleEn: "LEGO Harry Potter: Years 5-7",
+        year: 2011,
+        platforms: ['PS3', 'Xbox 360', 'Wii', 'PC', 'PSP', 'Vita', '3DS'],
+        genre: 'Aventura / Puzzle',
+        emoji: '<i class="fa-solid fa-cubes"></i>',
+        gradient: 'linear-gradient(135deg, #1a5276, #2e86c1, #7fb3d8)',
+        synopsis: 'Continue a jornada LEGO dos anos 5 a 7, incluindo a Ordem da Fênix, o Enigma do Príncipe e as Relíquias da Morte. A épica Batalha de Hogwarts em blocos!',
+        poster: ""
+    },
+    {
+        id: 9,
+        title: "Hogwarts Legacy",
+        titleEn: "Hogwarts Legacy",
+        year: 2023,
+        platforms: ['PS5', 'PS4', 'Xbox Series', 'Xbox One', 'PC', 'Switch'],
+        genre: 'RPG de Mundo Aberto',
+        emoji: '<i class="fa-solid fa-chess-rook"></i>',
+        gradient: 'linear-gradient(135deg, #6e4b1e, #c0a36e, #e8d5a3)',
+        synopsis: 'O aclamado RPG de mundo aberto ambientado nos anos 1800. Crie seu bruxo, explore uma Hogwarts imensa e seus arredores, domine magia antiga, domestique criaturas mágicas e descubra segredos ocultos. O jogo mais vendido de 2023.',
+        poster: ""
+    },
+    {
+        id: 10,
+        title: "Harry Potter: Quidditch Champions",
+        titleEn: "Harry Potter: Quidditch Champions",
+        year: 2024,
+        platforms: ['PS5', 'PS4', 'Xbox Series', 'Xbox One', 'PC', 'Switch'],
+        genre: 'Esportes / Multiplayer',
+        emoji: '<i class="fa-solid fa-broom"></i>',
+        gradient: 'linear-gradient(135deg, #1a472a, #2e7d32, #c0a36e)',
+        synopsis: 'O Quadribol multiplayer online! Jogue como artilheiro, batedor, goleiro ou apanhador em partidas competitivas. Customize seu personagem, escolha sua posição e conquiste a Copa.',
+        poster: ""
+    }
+];
