@@ -34,6 +34,12 @@
     gap: var(--space-sm);
 }
 
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
 .nav-link {
     font-family: var(--font-heading);
     font-size: 0.85rem;
