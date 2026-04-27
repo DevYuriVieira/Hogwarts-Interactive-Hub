@@ -25,6 +25,7 @@ const App = {
         this.setupParticles();
         this.setupSpellInput();
         this.setupLazyAnimations();
+        this.setupMobileMenu();
         
         window.addEventListener('hashchange', () => {
             if (window.location.hash === '#sorting') {
@@ -749,6 +750,35 @@ const App = {
         };
         observe();
         setInterval(observe, 2000);
+    },
+
+    setupMobileMenu() {
+        const toggle = document.getElementById('menu-toggle');
+        const nav = document.getElementById('navbar-nav');
+        
+        if (toggle && nav) {
+            toggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggle.classList.toggle('active');
+                nav.classList.toggle('active');
+            });
+
+            // Fecha o menu ao clicar em um link
+            nav.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    toggle.classList.remove('active');
+                    nav.classList.remove('active');
+                });
+            });
+
+            // Fecha ao clicar fora
+            document.addEventListener('click', (e) => {
+                if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+                    toggle.classList.remove('active');
+                    nav.classList.remove('active');
+                }
+            });
+        }
     }
 };
 

@@ -63,6 +63,12 @@
                 </a>
             </div>
 
+            <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
             <ul class="navbar-nav" id="navbar-nav" role="menubar">
                 <li role="none"><a href="#" class="nav-link active" data-page="home" role="menuitem" aria-selected="true" onclick="event.preventDefault(); App.navigate('home')">Início</a></li>
                 <li role="none"><a href="#" class="nav-link" data-page="movies" role="menuitem" onclick="event.preventDefault(); App.navigate('movies')">Filmes</a></li>
@@ -71,13 +77,11 @@
                 <li role="none"><a href="#" class="nav-link" data-page="games" role="menuitem" onclick="event.preventDefault(); App.navigate('games')">Games</a></li>
                 <li role="none"><a href="#" class="nav-link" data-page="spells" role="menuitem" onclick="event.preventDefault(); App.navigate('spells')">Feitiços</a></li>
                 <li role="none"><a href="#" class="nav-link" data-page="characters" role="menuitem" onclick="event.preventDefault(); App.navigate('characters')">Personagens</a></li>
+                <li role="none" class="mobile-only"><a href="#" class="nav-link" onclick="event.preventDefault(); App.startSorting()" style="color:var(--text-gold);">🎩 Refazer Seleção</a></li>
             </ul>
 
             <div class="navbar-actions">
                 <button class="btn btn-ghost" id="btn-sound" title="Ativar/Desativar Som" onclick="SoundEngine.toggle()" aria-label="Toggle som" style="min-width:auto; padding:8px 14px; font-size:1.2rem;">🔊</button>
-                <button class="btn btn-ghost btn-resort" id="btn-resort" title="Refazer Seleção" onclick="App.startSorting()" aria-label="Refazer seleção da casa">
-                    🎩 Re-selecionar
-                </button>
             </div>
         </div>
     </nav>
