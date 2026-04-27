@@ -117,7 +117,7 @@ const App = {
                             <img src="src/assets/images/houses/${this.userHouse.toLowerCase()}.png" style="width:240px; filter: drop-shadow(0 0 50px var(--neon-color));">
                         </div>
                     </div>
-                    <h2 style="color:var(--neon-color); font-size:5.5rem; font-family:var(--font-heading); letter-spacing:10px; text-shadow: var(--neon-glow-strong); margin-bottom: 40px; text-transform: uppercase;">${this.userHouse.toUpperCase()}</h2>
+                    <h2 class="house-name">${this.userHouse.toUpperCase()}</h2>
                     <div class="magic-border-card" style="margin: 40px auto; max-width: 900px;">
                         <div class="magic-border-inner house-details-grid" style="display:grid; grid-template-columns: repeat(2, 1fr); gap: 40px; text-align:left; padding: 60px; backdrop-filter: blur(20px);">
                             <div style="grid-column: span 2; font-style:italic; font-size:1.4rem; color:var(--text-primary); border-bottom: 2px solid var(--neon-color); box-shadow: 0 4px 10px -5px var(--neon-color); padding-bottom:25px; margin-bottom:25px; line-height: 1.6; text-align:center;">"${houseDetails.description}"</div>
@@ -136,7 +136,7 @@ const App = {
         return `
             <div class="hero-section" style="padding: 240px 20px; text-align:center; background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.9)), url('src/assets/images/hogwarts-hero.png'); background-size:cover; background-position: center; border-bottom: 3px solid var(--neon-color);">
                 <div style="animation: fadeInUp 1s ease-out;">
-                    <h1 style="font-size: clamp(3rem, 12vw, 8rem); color:var(--neon-color); text-shadow: var(--neon-glow-strong); font-family:var(--font-heading); line-height:0.85;">BEM-VINDO A<br>HOGWARTS</h1>
+                    <h1 class="hero-title">BEM-VINDO A<br>HOGWARTS</h1>
                     <p style="font-size: 1.6rem; margin-top:30px; opacity:0.8; font-family:var(--font-prophet);">O portal definitivo para o Universo Bruxo.</p>
                     <button class="btn btn-primary btn-lg" style="margin-top:60px; padding: 20px 50px; border-radius:50px; font-weight:bold; box-shadow: var(--neon-glow-strong);" onclick="App.startSorting()">
                         ${this.userHouse ? '🎩 REFAZER SELEÇÃO' : '🎩 CHAPÉU SELETOR'}
@@ -201,48 +201,51 @@ const App = {
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
         const html = `
-            <div class="daily-prophet-wrapper" style="padding: 100px 20px; background: #dcd0b9; min-height:100vh;">
-                <div class="daily-prophet-container" style="max-width:1200px; margin:0 auto; background:#e9dcb5; padding:60px; border:2px solid #000; font-family:'Lora', serif; color:#000; box-shadow: 0 40px 100px rgba(0,0,0,0.4);">
-                    <div style="text-align:center; border-bottom:10px double #000; padding-bottom:30px; margin-bottom:50px; color:#000;">
-                        <h1 style="font-family:'Cinzel'; font-weight:900; font-size:6rem; margin:0; line-height:0.8; color:#000;">O PROFETA DIÁRIO</h1>
-                        <div style="display:flex; justify-content:space-between; border-top:2px solid #000; padding:15px 0; margin-top:15px; font-weight:bold; text-transform:uppercase; font-size:1rem; letter-spacing:2px; color:#000;">
-                            <span style="color:#000;">Edição Extraordinária</span>
-                            <span>⭐️⭐️⭐️⭐️⭐️</span>
-                            <span style="color:#000;">Londres, 2026 — 5 Nuques</span>
-                        </div>
+            <div class="daily-prophet-wrapper">
+                <div class="daily-prophet-container">
+                    <div class="prophet-header-meta">
+                        <span>Nº 394.202</span>
+                        <span>LONDRES, 2026</span>
+                        <span>EDIÇÃO ESPECIAL</span>
                     </div>
-                    <div class="daily-prophet-content" style="display:grid; grid-template-columns: 2fr 1fr; gap:60px; color:#000;">
-                        <div>
-                            <div style="background:#000; padding:12px; margin-bottom:40px; transform: rotate(-1deg);">
-                                <img src="src/assets/images/posters/series.png" class="magic-photo" style="width:100%; filter:grayscale(1) contrast(1.3);">
+                    <h1 class="prophet-main-title">O PROFETA DIÁRIO</h1>
+                    
+                    <div class="prophet-sub-header">
+                        <h2>HBO REVELA: A NOVA ERA DE HOGWARTS COMEÇA EM 2026</h2>
+                    </div>
+
+                    <div class="prophet-columns">
+                        <div class="main-column">
+                            <div class="featured-image">
+                                <img src="src/assets/images/posters/series.png" class="magic-photo">
                             </div>
-                            <h2 style="font-family:'Cinzel'; font-size:3.5rem; line-height:1; font-weight:900; margin-bottom:30px; text-transform:uppercase; color:#000;">A Magia do Reboot: HBO confirma série épica!</h2>
-                            <div style="column-count:2; column-gap:40px; text-align:justify; font-size:1.15rem; line-height:1.6; color:#000;">
-                                <p style="color:#000;"><span style="float:left; font-size:5rem; line-height:0.8; font-family:'Cinzel'; margin-right:15px; font-weight:900; color:#000;">N</span>os corredores do Ministério, o boato se tornou verdade. A Warner Bros. Discovery anunciou a maior produção da década.</p>
-                                <p style="color:#000;">${SERIES.description}</p>
+                            <h2 class="article-title">A Magia do Reboot: HBO confirma série épica!</h2>
+                            <div class="article-body">
+                                <p><span class="drop-cap">N</span>os corredores do Ministério, o boato se tornou verdade. A Warner Bros. Discovery anunciou a maior produção da década.</p>
+                                <p>${SERIES.description}</p>
                             </div>
                         </div>
-                        <div style="display:flex; flex-direction:column; gap:40px;">
-                            <div style="border:2px solid #000; padding:30px; background: rgba(0,0,0,0.03); color:#000;">
-                                <h4 style="font-family:'Cinzel'; border-bottom:2px solid #000; padding-bottom:10px; margin-bottom:20px; font-weight:900; color:#000;">CURIOSIDADES BRUXAS</h4>
-                                <ul style="list-style:none; padding:0; display:flex; flex-direction:column; gap:15px; color:#000;">
-                                    ${SERIES.highlights.map(h => `<li style="font-size:1rem; display:flex; gap:12px; color:#000;"><span style="color:#000;">⚡</span> ${h}</li>`).join('')}
+                        <div class="sidebar-column">
+                            <div class="curiosities-box">
+                                <h4>CURIOSIDADES BRUXAS</h4>
+                                <ul>
+                                    ${SERIES.highlights.map(h => `<li><span>⚡</span> ${h}</li>`).join('')}
                                 </ul>
                             </div>
-                            <div style="padding:30px; background:#fff; border:1px solid #000; box-shadow: 10px 10px 0 #000; color:#000;">
-                                <h4 style="font-family:'Cinzel'; margin-bottom:15px; font-weight:900; color:#000;">ÚLTIMA HORA</h4>
-                                <p style="font-size:0.95rem; font-style:italic; color:#000;">"Fontes anônimas indicam que os testes de elenco para o trio de ouro já começaram em Hogwarts."</p>
+                            <div class="extra-news-box">
+                                <h4>ÚLTIMA HORA</h4>
+                                <p>"Fontes anônimas indicam que os testes de elenco para o trio de ouro já começaram em Hogwarts."</p>
                             </div>
                         </div>
                     </div>
 
-                    <div style="border:2px solid #000; padding:30px 40px; margin-top:60px; text-align:center; background:rgba(0,0,0,0.03);">
-                        <h3 style="font-family:'Cinzel'; font-weight:900; font-size:1rem; letter-spacing:6px; color:#000; margin-bottom:20px;">⏳ CONTAGEM REGRESSIVA PARA A ESTREIA</h3>
-                        <div id="prophet-countdown" style="display:flex; justify-content:center; gap:40px;">
-                            <div><span class="countdown-num" id="cd-days" style="font-family:'Cinzel'; font-size:4.5rem; font-weight:900; color:#000; line-height:1;">${String(days).padStart(2,'0')}</span><div style="font-family:'Cinzel'; font-size:0.8rem; letter-spacing:4px; color:#000; margin-top:5px;">DIAS</div></div>
-                            <div><span class="countdown-num" id="cd-hours" style="font-family:'Cinzel'; font-size:4.5rem; font-weight:900; color:#000; line-height:1;">${String(hours).padStart(2,'0')}</span><div style="font-family:'Cinzel'; font-size:0.8rem; letter-spacing:4px; color:#000; margin-top:5px;">HORAS</div></div>
-                            <div><span class="countdown-num" id="cd-minutes" style="font-family:'Cinzel'; font-size:4.5rem; font-weight:900; color:#000; line-height:1;">${String(minutes).padStart(2,'0')}</span><div style="font-family:'Cinzel'; font-size:0.8rem; letter-spacing:4px; color:#000; margin-top:5px;">MINUTOS</div></div>
-                            <div><span class="countdown-num" id="cd-seconds" style="font-family:'Cinzel'; font-size:4.5rem; font-weight:900; color:#000; line-height:1;">${String(seconds).padStart(2,'0')}</span><div style="font-family:'Cinzel'; font-size:0.8rem; letter-spacing:4px; color:#000; margin-top:5px;">SEGUNDOS</div></div>
+                    <div class="countdown-section">
+                        <h3>⏳ CONTAGEM REGRESSIVA PARA A ESTREIA</h3>
+                        <div id="prophet-countdown">
+                            <div><span class="countdown-num" id="cd-days">${String(days).padStart(2,'0')}</span><div class="countdown-label">DIAS</div></div>
+                            <div><span class="countdown-num" id="cd-hours">${String(hours).padStart(2,'0')}</span><div class="countdown-label">HORAS</div></div>
+                            <div><span class="countdown-num" id="cd-minutes">${String(minutes).padStart(2,'0')}</span><div class="countdown-label">MINUTOS</div></div>
+                            <div><span class="countdown-num" id="cd-seconds">${String(seconds).padStart(2,'0')}</span><div class="countdown-label">SEGUNDOS</div></div>
                         </div>
                     </div>
                 </div>
@@ -322,7 +325,7 @@ const App = {
             <div class="spell-cast-ring" style="border-color:${spell.color};"></div>
             <div class="spell-cast-ring ring-2" style="border-color:${spell.color};"></div>
             <div class="spell-cast-ring ring-3" style="border-color:${spell.color};"></div>
-            <div class="spell-cast-name" style="color:${spell.color}; text-shadow: 0 0 30px ${spell.color}, 0 0 60px ${spell.color};">${spell.name}</div>
+            <div class="spell-cast-name">${spell.name}</div>
         `;
 
         for (let i = 0; i < 16; i++) {
@@ -418,7 +421,7 @@ const App = {
         ];
         return `
             <div class="marauder-wrapper" style="margin-top:100px; padding-bottom: 100px;">
-                <div class="marauder-map-closed" id="marauder-closed" onclick="App.openMap()">
+                <div class="marauder-map-closed" id="marauder-closed" onclick="App.openMap()" style="cursor:pointer;">
                     <div class="map-fold-outer">
                         <div class="map-fold-label">
                             <span style="font-family:'UnifrakturMaguntia'; font-size:1.4rem; color:#3d2b1f;">O Mapa do Maroto</span>
@@ -456,7 +459,7 @@ const App = {
                             }).join('')}
                         </div>
                         <div id="map-characters-container" style="position:absolute; inset:0; pointer-events:none; overflow:hidden;"></div>
-                        <div class="map-close-btn" onclick="App.closeMap()">
+                        <div class="map-close-btn" onclick="App.closeMap()" style="cursor:pointer;">
                             <span style="font-family:'UnifrakturMaguntia'; font-size:0.9rem; color:#3d2b1f;">Malfeito Feito</span>
                         </div>
                     </div>
@@ -526,6 +529,9 @@ const App = {
             const startX = Math.random() * 70 + 10;
             const startY = Math.random() * 50 + 25;
             const angle = Math.random() * 360;
+            const rad = angle * Math.PI / 180;
+            const dx = Math.cos(rad) * (15 + Math.random() * 10);
+            const dy = Math.sin(rad) * (15 + Math.random() * 10);
 
             blip.style.cssText = `position:absolute; left:${startX}%; top:${startY}%; transition:all 12s linear; opacity:0;`;
             blip.innerHTML = `
@@ -545,7 +551,9 @@ const App = {
                 steps++;
             }, 1200);
 
-            setTimeout(() => { blip.style.opacity = '1'; blip.style.left = (startX + 10) + '%'; }, 100);
+            const endX = Math.max(5, Math.min(85, startX + dx));
+            const endY = Math.max(10, Math.min(80, startY + dy));
+            setTimeout(() => { blip.style.opacity = '1'; blip.style.left = endX + '%'; blip.style.top = endY + '%'; }, 100);
             setTimeout(() => { clearInterval(dropStep); blip.style.opacity = '0'; setTimeout(()=>blip.remove(), 2000); }, 11000);
         };
 
@@ -652,7 +660,7 @@ const App = {
         const container = document.getElementById('quiz-content');
         container.innerHTML = `
             <div style="text-align:center; animation: fadeIn 0.5s;">
-                <h2 style="font-family:var(--font-heading); font-size:4rem; color:var(--text-gold); letter-spacing:10px; animation: pulse 1.5s infinite;">DECIDINDO...</h2>
+                <h2 class="deciding-title">DECIDINDO...</h2>
                 <p style="font-size:1.5rem; opacity:0.6; margin-top:20px;">O Chapéu Seletor está lendo sua mente...</p>
             </div>
         `;
@@ -684,7 +692,7 @@ const App = {
                     container.innerHTML = `
                         <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; animation: scaleIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
                             <img src="src/assets/images/houses/${result}.png" style="width:280px; margin-bottom:30px; filter: drop-shadow(0 0 40px var(--neon-color));">
-                            <h2 style="font-size:5.5rem; color:var(--neon-color); text-shadow: var(--neon-glow-strong); font-family:var(--font-heading); margin: 0;">${result.toUpperCase()}!</h2>
+                            <h2 class="house-name-reveal">${result.toUpperCase()}!</h2>
                             <p style="font-size:1.5rem; margin-top:20px; opacity:0.8; font-family:var(--font-prophet);">Você pertence à casa do(a) ${result === 'gryffindor' ? 'Coragem' : result === 'slytherin' ? 'Ambição' : result === 'ravenclaw' ? 'Sabedoria' : 'Lealdade'}!</p>
                             <button class="btn btn-primary btn-lg" style="margin-top:60px; padding: 20px 60px; font-weight:bold; border-radius:50px; box-shadow: var(--neon-glow);" onclick="location.reload()">ENTRAR NO SALÃO PRINCIPAL</button>
                         </div>

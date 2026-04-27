@@ -385,6 +385,108 @@ main {
     color: #e9dcb5 !important;
 }
 
+/* --- DAILY PROPHET STYLES --- */
+.daily-prophet-wrapper {
+    padding: 100px 20px;
+    background: #dcd0b9;
+    min-height: 100vh;
+}
+
+.daily-prophet-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #e9dcb5;
+    padding: 60px;
+    border: 15px solid #222;
+    font-family: 'Lora', serif;
+    color: #000;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.prophet-header-meta {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Cinzel';
+    font-weight: bold;
+    border-bottom: 4px double #000;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    color: #000;
+}
+
+.prophet-main-title {
+    font-family: 'UnifrakturMaguntia';
+    font-size: 6.5rem;
+    text-align: center;
+    border-bottom: 4px double #000;
+    margin: 0;
+    line-height: 1;
+    letter-spacing: -2px;
+    color: #000;
+}
+
+.prophet-sub-header {
+    text-align: center;
+    border-bottom: 8px solid #000;
+    padding: 20px 0;
+    margin-bottom: 30px;
+}
+
+.prophet-sub-header h2 {
+    font-family: 'Cinzel';
+    font-size: 2.2rem;
+    font-weight: 900;
+    margin: 0;
+    color: #000 !important;
+}
+
+.article-title {
+    font-family: 'Cinzel';
+    font-size: 2.8rem;
+    line-height: 1.1;
+    font-weight: 900;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    color: #000 !important;
+}
+
+.curiosities-box h4 {
+    font-family: 'Cinzel';
+    border-bottom: 2px solid #000;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    font-weight: 900;
+    color: #000 !important;
+}
+
+.countdown-section h3 {
+    font-family: 'Cinzel';
+    font-weight: 900;
+    font-size: 0.9rem;
+    letter-spacing: 5px;
+    margin-bottom: 15px;
+    color: #000 !important;
+}
+
+.countdown-num {
+    font-family: 'Cinzel';
+    font-size: 4rem;
+    font-weight: 900;
+    line-height: 1;
+    color: #000 !important;
+}
+
+.countdown-label {
+    font-family: 'Cinzel';
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    margin-top: 5px;
+    color: #000 !important;
+}
+
 
 .sorting-quiz-modal {
     position: fixed;
@@ -427,4 +529,58 @@ main {
     font-size: 1.5rem;
     cursor: pointer;
     color: var(--text-muted);
+}
+
+/* --- BASE TITLES (FORMERLY INLINE) --- */
+.hero-title {
+    font-size: clamp(3rem, 12vw, 8rem);
+    color: var(--neon-color);
+    text-shadow: var(--neon-glow-strong);
+    font-family: var(--font-heading);
+    line-height: 0.85;
+    text-align: center;
+}
+
+.house-name {
+    color: var(--neon-color);
+    font-size: 5.5rem;
+    font-family: var(--font-heading);
+    letter-spacing: 10px;
+    text-shadow: var(--neon-glow-strong);
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.deciding-title {
+    font-family: var(--font-heading);
+    font-size: 4rem;
+    color: var(--text-gold);
+    letter-spacing: 10px;
+    animation: pulse 1.5s infinite;
+    text-align: center;
+}
+
+.house-name-reveal {
+    font-size: 5.5rem;
+    color: var(--neon-color);
+    text-shadow: var(--neon-glow-strong);
+    font-family: var(--font-heading);
+    margin: 0;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.spell-cast-name {
+    font-size: clamp(2rem, 8vw, 4rem);
+    font-family: 'Cinzel', serif;
+    color: var(--primary-color);
+    z-index: 1000;
+    pointer-events: none;
+    text-shadow: 0 0 50px var(--primary-color);
+    text-align: center;
+    margin-top: 25px;
+    letter-spacing: 6px;
+    max-width: 90vw;
+    word-break: break-word;
 }

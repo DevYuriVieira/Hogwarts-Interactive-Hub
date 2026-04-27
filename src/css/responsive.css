@@ -1,104 +1,261 @@
-@media (max-width: 1024px) {
-    .daily-prophet-container {
-        padding: 40px !important;
-    }
+/* ============================================================
+   RESPONSIVIDADE GLOBAL - MUNDO BRUXO
+   ============================================================ */
+
+/* Bloqueio de Overflow */
+html, body {
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
 }
 
 @media (max-width: 768px) {
-    /* Navbar Mobile Fix */
-    .navbar {
-        height: 70px !important;
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-    }
 
+    /* ======= NAVBAR ======= */
     .navbar-inner {
-        height: 100% !important;
-        padding: 0 15px !important;
-        display: flex !important;
-        flex-direction: row !important;
-        justify-content: space-between !important;
-        align-items: center !important;
+        padding: 0 12px !important;
     }
 
     .navbar-brand {
-        flex: 1 1 0 !important;
-        order: 1;
+        flex: 0 0 auto !important;
+        max-width: 150px !important;
     }
 
     .navbar-logo {
-        font-size: 1rem !important;
+        font-size: 0.95rem !important;
     }
 
-    /* Botão de Som no Meio */
-    .navbar-actions {
-        order: 2;
-        flex: 1 1 0 !important;
+    /* Hambúrguer visível */
+    .menu-toggle {
         display: flex !important;
+        z-index: 99999 !important;
+    }
+
+    /* Menu escondido por padrão, drawer quando ativo */
+    #navbar-nav {
+        position: fixed !important;
+        top: 0 !important;
+        right: -100% !important;
+        width: 80% !important;
+        height: 100vh !important;
+        background: rgba(10, 10, 15, 0.98) !important;
+        backdrop-filter: blur(25px) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
         justify-content: center !important;
+        gap: 20px !important;
+        z-index: 99998 !important;
+        transition: right 0.4s ease !important;
+        list-style: none !important;
         margin: 0 !important;
         padding: 0 !important;
     }
 
-    #btn-sound {
-        font-size: 1.1rem !important;
-        background: rgba(255,255,255,0.05);
-        border-radius: 50%;
-        padding: 8px !important;
+    #navbar-nav.active {
+        right: 0 !important;
     }
 
-    /* Hambúrguer no Canto Direito */
-    .menu-toggle {
-        display: flex !important;
-        order: 3;
-        flex: 0 0 auto !important;
-        z-index: 31000 !important;
-        margin-left: 10px;
+    #navbar-nav li {
+        width: 100% !important;
     }
 
-    .navbar-nav {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 85%;
-        height: 100vh;
-        background: rgba(10, 10, 15, 0.98);
-        backdrop-filter: blur(25px);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 20px !important;
-        transition: right 0.4s ease;
-        z-index: 30500;
-        margin: 0;
-        padding: 40px 0;
-        list-style: none;
+    .nav-link {
+        display: block !important;
+        font-size: 1.2rem !important;
+        padding: 15px !important;
+        text-align: center !important;
+        width: 100% !important;
     }
 
-    .navbar-nav.active {
-        right: 0;
+    .mobile-only {
+        display: block !important;
     }
 
-    /* GAP para o Chapéu Seletor não bater na Navbar */
-    .sorting-quiz-inner {
-        padding-top: 100px !important; /* Navbar tem 70px */
+    /* ======= TÍTULOS QUE QUEBRAVAM ======= */
+
+    /* Nome da casa na home (showcase) */
+    .house-name {
+        font-size: clamp(1.8rem, 9vw, 3rem) !important;
+        letter-spacing: 3px !important;
+        word-wrap: break-word !important;
+    }
+
+    /* Nome da casa na revelação (sorting) */
+    .house-name-reveal {
+        font-size: clamp(2rem, 10vw, 3.5rem) !important;
+        letter-spacing: 3px !important;
+    }
+
+    /* Hero */
+    .hero-title {
+        font-size: clamp(1.8rem, 8vw, 2.8rem) !important;
+        line-height: 1.1 !important;
+    }
+
+    /* Decidindo */
+    .deciding-title {
+        font-size: clamp(1.5rem, 7vw, 2.5rem) !important;
+        letter-spacing: 4px !important;
+    }
+
+    /* Feitiço background */
+    .spell-cast-name {
+        font-size: clamp(2rem, 10vw, 3rem) !important;
+        white-space: normal !important;
+        width: 90vw !important;
+        text-align: center !important;
+    }
+
+    /* ======= PROFETA DIÁRIO ======= */
+    .daily-prophet-wrapper {
+        padding: 80px 8px !important;
+    }
+
+    .daily-prophet-container {
+        padding: 20px !important;
+        border-width: 8px !important;
+    }
+
+    .prophet-main-title {
+        font-size: clamp(2rem, 12vw, 3.5rem) !important;
+    }
+
+    .prophet-header-meta {
+        font-size: 0.65rem !important;
+        flex-wrap: wrap !important;
+        gap: 5px !important;
+    }
+
+    .prophet-sub-header h2 {
+        font-size: clamp(0.9rem, 4vw, 1.3rem) !important;
+    }
+
+    .prophet-columns {
         display: flex !important;
         flex-direction: column !important;
-        justify-content: flex-start !important; /* Começa do topo com o padding */
-        height: 100% !important;
-        overflow-y: auto;
+        gap: 25px !important;
+    }
+
+    .article-title {
+        font-size: 1.4rem !important;
+    }
+
+    .article-body {
+        column-count: 1 !important;
+    }
+
+    .countdown-num {
+        font-size: 2rem !important;
+    }
+
+    #prophet-countdown {
+        gap: 12px !important;
+    }
+
+    /* ======= CERIMÔNIA ======= */
+    .sorting-quiz-inner {
+        padding: 80px 15px 30px !important;
     }
 
     #sorting-hat-img {
-        width: 240px !important; /* Um pouco menor no mobile para caber melhor */
-        margin-top: 20px !important;
+        width: 200px !important;
     }
 
-    .hero-section h1 { font-size: 2.2rem !important; }
+    #hat-speech {
+        font-size: 1.3rem !important;
+    }
+
+    /* Botão fechar (X) */
+    .close-btn {
+        position: fixed !important;
+        top: 15px !important;
+        right: 15px !important;
+        font-size: 2rem !important;
+        z-index: 200000 !important;
+        background: rgba(0,0,0,0.6) !important;
+        border-radius: 50% !important;
+        width: 44px !important;
+        height: 44px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        color: #fff !important;
+        border: 1px solid rgba(255,255,255,0.2) !important;
+    }
+
+    /* ======= FEITIÇOS ======= */
+    .spells-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* ======= PERSONAGENS ======= */
+    .characters-grid {
+        grid-template-columns: 1fr 1fr !important;
+    }
+
+    /* ======= MAPA DO MAROTO ======= */
+    .marauder-map-open {
+        width: 96vw !important;
+        min-height: 400px !important;
+    }
+
+    .map-msg-title {
+        font-size: clamp(2.5rem, 12vw, 4rem) !important;
+    }
+
+    .map-header h2 {
+        font-size: clamp(2.5rem, 12vw, 4rem) !important;
+    }
+
+    .marauder-nav-container {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 8px !important;
+    }
+
+    /* ======= ACCORDION (CARDS) ======= */
+    .accordion-container {
+        height: auto !important;
+        flex-direction: column !important;
+        gap: 15px !important;
+        padding: 10px !important;
+    }
+
+    .accordion-card {
+        width: 100% !important;
+        height: 350px !important;
+        flex: none !important;
+    }
+
+    .accordion-card.active {
+        height: 420px !important;
+    }
+
+    .house-details-grid {
+        grid-template-columns: 1fr !important;
+        padding: 20px !important;
+        gap: 15px !important;
+    }
+
+    /* ======= PERGUNTAS ======= */
+    .question-step h3 {
+        font-size: 1.4rem !important;
+    }
+
+    .quiz-question-options {
+        grid-template-columns: 1fr !important;
+    }
 }
 
 @media (min-width: 769px) {
-    .mobile-only { display: none !important; }
+    .mobile-only {
+        display: none !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar-logo { font-size: 0.85rem !important; }
+    .hero-title { font-size: 1.6rem !important; }
+    .house-name { font-size: 1.6rem !important; letter-spacing: 2px !important; }
+    .characters-grid { grid-template-columns: 1fr !important; }
 }
